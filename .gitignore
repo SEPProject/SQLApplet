@@ -3,5 +3,5 @@ logs/*
 .idea/
 .idea
 out/
-DQLApplet.iml
+SQLApplet.iml
 !.gitkeep
