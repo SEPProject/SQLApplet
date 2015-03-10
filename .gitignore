@@ -2,4 +2,6 @@ logs/*
 .idea/*
 .idea/
 .idea
+out/
+DQLApplet.iml
 !.gitkeep
