@@ -14,13 +14,20 @@ public class EsitePanel extends Panel {
     private ArrayList<Article> myArticles;
     private Panel articlePanel;
 
-    private int WIDTH_ARTICLE_PANEL = 310;
+
+    private int WIDTH_PANIER = 150;
+    private int HEIGHT_PANIER = 350;
+    private int HEIGHT_DETAIL_PANIER = 250;
+    private int WIDTH_ARTICLE_DET_PANEL = 300;
+    private int HEIGHT_ARTICLE_DET_PANEL = 150;
+    private int WIDTH_ARTICLE_PANEL = WIDTH_ARTICLE_DET_PANEL+10;
     private int HEIGHT_ARTICLE_PANEL = 600;
+
     public EsitePanel(ArrayList<Article> myArticles){
         this.myArticles = myArticles;
 
-        this.articlePanel = new Panel(new GridLayout(myArticles.size()-1,0));
-        this.articlePanel.setBackground(Color.blue);
+        this.articlePanel = new Panel(new GridLayout(myArticles.size(),0));
+
         for(int i = 0;i < myArticles.size();i++){
             this.articlePanel.add(createArticlePanel(myArticles.get(i)));
         }
@@ -33,8 +40,7 @@ public class EsitePanel extends Panel {
 
     }
 
-    private int WIDTH_ARTICLE_DET_PANEL = 300;
-    private int HEIGHT_ARTICLE_DET_PANEL = 150;
+
     private Panel createArticlePanel(Article article){
         Panel toReturn = new Panel(new GridBagLayout());
         JLabel price = new JLabel(String.valueOf(article.getPrice()+"€"));
@@ -70,27 +76,34 @@ public class EsitePanel extends Panel {
         return toReturn;
     }
 
-    private int ELEMENT_IN_PANIER = 5;
-    private int WIDTH_PANIER = 75;
-    private int HEIGHT_PANIER = 350;
-    private int HEIGHT_DETAIL_PANIER = 250;
-
     private Panel createPanierPanel(){
-        Panel toReturn = new Panel(new GridLayout(ELEMENT_IN_PANIER,1));
+        Panel toReturn = new Panel(new GridBagLayout());
         JButton reset = new JButton("Reset");
 
         JPanel detailPanier = new JPanel();
+        detailPanier.setBackground(Color.PINK);
         detailPanier.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_DETAIL_PANIER));
 
         JTextArea idToAdd = new JTextArea();
+        idToAdd.setPreferredSize(new Dimension(70,15));
         JButton addPanier = new JButton("Ajouter");
-        JLabel valeurPanier = new JLabel("Valeur du panier");
+        JLabel valeurPanier = new JLabel("Valeur du panier : 0 €");
 
-        toReturn.add(reset);
-        toReturn.add(detailPanier);
-        toReturn.add(idToAdd);
-        toReturn.add(addPanier);
-        toReturn.add(valeurPanier);
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.VERTICAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        toReturn.add(reset,c);
+
+        c.gridy = 1;
+        toReturn.add(detailPanier,c);
+        c.gridy = 2;
+        toReturn.add(idToAdd,c);
+        c.gridy = 3;
+        toReturn.add(addPanier,c);
+        c.gridy = 4;
+        toReturn.add(valeurPanier,c);
 
         toReturn.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_PANIER));
 

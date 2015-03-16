@@ -27,7 +27,6 @@ public class Launcher extends Applet {
         super.init();
         SQLMissionPanel mpSQL = new SQLMissionPanel();
         this.setLayout(new GridLayout(1, 3));
-       // this.add(mpSQL.getSQLMissionPanel().getPannelFrame());
 
         /*
         TEST THE ESITE PANEL
@@ -42,8 +41,9 @@ public class Launcher extends Applet {
         myArts.add(art3);
 
         EsitePanel eSite = new EsitePanel(myArts);
-        this.add(eSite);
 
+        this.add(eSite);
+        this.add(mpSQL.getSQLMissionPanel().getPannelFrame());
     }
 
     // Change les dimensions de l'applet en fixant une nouvelle longueur et une nouvelle largeur.
