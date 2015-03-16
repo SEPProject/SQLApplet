@@ -14,6 +14,8 @@ public class EsitePanel extends Panel {
     private ArrayList<Article> myArticles;
     private Panel articlePanel;
 
+    private int WIDTH_ARTICLE_PANEL = 310;
+    private int HEIGHT_ARTICLE_PANEL = 600;
     public EsitePanel(ArrayList<Article> myArticles){
         this.myArticles = myArticles;
 
@@ -21,6 +23,7 @@ public class EsitePanel extends Panel {
         for(int i = 0;i < myArticles.size();i++){
             this.articlePanel.add(createArticlePanel(myArticles.get(i)));
         }
+        this.articlePanel.setPreferredSize(new Dimension(WIDTH_ARTICLE_PANEL,HEIGHT_ARTICLE_PANEL));
 
         this.setLayout(new GridLayout(1,2));
 
@@ -29,6 +32,8 @@ public class EsitePanel extends Panel {
 
     }
 
+    private int WIDTH_ARTICLE_DET_PANEL = 300;
+    private int HEIGHT_ARTICLE_DET_PANEL = 150;
     private Panel createArticlePanel(Article article){
         Panel toReturn = new Panel(new GridBagLayout());
         JLabel price = new JLabel(String.valueOf(article.getPrice()+"€"));
@@ -59,14 +64,23 @@ public class EsitePanel extends Panel {
         c.gridy = 2;
         toReturn.add(id,c);
 
+        toReturn.setPreferredSize(new Dimension(WIDTH_ARTICLE_DET_PANEL,HEIGHT_ARTICLE_DET_PANEL));
+
         return toReturn;
     }
 
     private int ELEMENT_IN_PANIER = 5;
+    private int WIDTH_PANIER = 75;
+    private int HEIGHT_PANIER = 350;
+    private int HEIGHT_DETAIL_PANIER = 250;
+
     private Panel createPanierPanel(){
         Panel toReturn = new Panel(new GridLayout(ELEMENT_IN_PANIER,1));
         JButton reset = new JButton("Reset");
+
         JPanel detailPanier = new JPanel();
+        detailPanier.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_DETAIL_PANIER));
+
         JTextArea idToAdd = new JTextArea();
         JButton addPanier = new JButton("Ajouter");
         JLabel valeurPanier = new JLabel("Valeur du panier");
@@ -77,6 +91,13 @@ public class EsitePanel extends Panel {
         toReturn.add(addPanier);
         toReturn.add(valeurPanier);
 
+        toReturn.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_PANIER));
+
+        return toReturn;
+    }
+
+    private JLabel createPanelArticleForPanier(Article article){
+        JLabel toReturn = new JLabel(article.getName()+" "+String.valueOf(article.getPrice())+"€");
         return toReturn;
     }
 
