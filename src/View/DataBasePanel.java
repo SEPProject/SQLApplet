@@ -1,6 +1,7 @@
 package View;
 
 import Model.Article;
+import Model.DataBaseManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,18 +13,29 @@ import java.util.ArrayList;
 
 public class DataBasePanel extends Panel {
 
-    public DataBasePanel(){
-
-    }
+    private JPanel dbPanel;
+    private DataBaseManager dbm;
 
     private String nameCol = "Name";
     private String descCol = "Description";
     private String idCol = "Id";
     private String prixCol = "Prix";
 
+    public DataBasePanel(ArrayList<Article> articles){
+
+        this.dbm = new DataBaseManager(articles);
+
+        JLabel baseTitle = new JLabel("article_table");
+
+        this.add(baseTitle);
+        this.add(createDatabasePanel(articles));
+        this.add(createVerificationPanel());
+    }
+
+
 
     private JPanel createDatabasePanel(ArrayList<Article> articles){
-        JPanel dbPanel = new JPanel(new GridLayout(articles.size(),4));
+        dbPanel = new JPanel(new GridLayout(articles.size(),4));
         JLabel labelName = new JLabel(nameCol);
         JLabel labelDesc = new JLabel(descCol);
         JLabel labelId = new JLabel(idCol);
@@ -46,6 +58,18 @@ public class DataBasePanel extends Panel {
         }
 
         return dbPanel;
+    }
+
+    private void addArticleToBase(Article article){
+        this.dbm.addArticle(article);
+        JLabel labelNameArt = new JLabel(article.getName());
+        JLabel labelDescArt = new JLabel(article.getDescription());
+        JLabel labelIdArt = new JLabel(String.valueOf(article.getId()));
+        JLabel labelPrixArt = new JLabel(String.valueOf(article.getPrice()));
+        dbPanel.add(labelNameArt);
+        dbPanel.add(labelDescArt);
+        dbPanel.add(labelIdArt);
+        dbPanel.add(labelPrixArt);
     }
 
     private Panel createVerificationPanel(){
