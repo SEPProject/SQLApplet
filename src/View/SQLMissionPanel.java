@@ -8,9 +8,9 @@ import MainComponents.Submission;
  * Created by julescantegril on 15/03/2015.
  */
 public class SQLMissionPanel {
-
-    public static MissionPanel getSQLMissionPanel(){
-        MissionPanel mp = new MissionPanel("Missions de l'applet d'injection SQL");
+    MissionPanel mp;
+    public SQLMissionPanel(){
+        mp = new MissionPanel("Missions de l'applet d'injection SQL");
         Mission mission = new Mission("Présentation","Cette mission a pour but de vous familiariser avec les requêtes SQL.");
         mission.addSubmission(new Submission("Qu'est-ce qu'une base de donnée ? ","Une base de donnée n'est rien de plus qu'un tableau composé de colonne et qui contient des informations."));
         mission.addSubmission(new Submission("Qu'est-ce qu'une requête ?","Une requête SQL interroge la base de donnée. Cette derniére renvoit les informations demandées."));
@@ -47,8 +47,9 @@ public class SQLMissionPanel {
         mp.addMission(mission4);
         mp.addMission(mission5);
         mp.addMission(mission6);
-
-        return mp;
     }
 
+    public MissionPanel getSQLMissionPanel(){
+        return this.mp;
+    }
 }
