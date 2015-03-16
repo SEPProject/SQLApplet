@@ -35,7 +35,7 @@ public class DataBasePanel extends Panel {
 
 
     private JPanel createDatabasePanel(ArrayList<Article> articles){
-        dbPanel = new JPanel(new GridLayout(articles.size(),4));
+        dbPanel = new JPanel(new GridLayout(articles.size()+1,4));
         JLabel labelName = new JLabel(nameCol);
         JLabel labelDesc = new JLabel(descCol);
         JLabel labelId = new JLabel(idCol);
@@ -56,7 +56,6 @@ public class DataBasePanel extends Panel {
             dbPanel.add(labelIdArt);
             dbPanel.add(labelPrixArt);
         }
-
         return dbPanel;
     }
 

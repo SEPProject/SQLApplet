@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Article;
+import View.DataBasePanel;
 import View.EsitePanel;
 import View.SQLMissionPanel;
 
@@ -69,6 +70,9 @@ public class Launcher extends Applet {
 
         EsitePanel eSite = new EsitePanel(myArts);
 
+        DataBasePanel dbp = new DataBasePanel(myArts);
+
+        this.add(dbp);
         this.add(eSite);
         this.add(mpSQL.getSQLMissionPanel().getPannelFrame());
     }
