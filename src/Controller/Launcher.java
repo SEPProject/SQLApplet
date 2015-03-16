@@ -1,9 +1,12 @@
 package Controller;
 
+import Model.Article;
+import View.EsitePanel;
 import View.SQLMissionPanel;
 
 import java.applet.Applet;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by julescantegril on 10/03/2015.
@@ -24,7 +27,22 @@ public class Launcher extends Applet {
         super.init();
         SQLMissionPanel mpSQL = new SQLMissionPanel();
         this.setLayout(new GridLayout(1, 3));
-        this.add(mpSQL.getSQLMissionPanel().getPannelFrame());
+       // this.add(mpSQL.getSQLMissionPanel().getPannelFrame());
+
+        /*
+        TEST THE ESITE PANEL
+         */
+
+        Article art1 = new Article(1,125,"Chooss","Trop belle");
+        Article art2 = new Article(2,12,"Css","Tropelle");
+        Article art3 = new Article(3,15,"Cho","Trop belle");
+        ArrayList<Article> myArts = new ArrayList<Article>();
+        myArts.add(art1);
+        myArts.add(art2);
+        myArts.add(art3);
+
+        EsitePanel eSite = new EsitePanel(myArts);
+        this.add(eSite);
 
     }
 

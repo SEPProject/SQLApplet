@@ -19,7 +19,8 @@ public class EsitePanel extends Panel {
     public EsitePanel(ArrayList<Article> myArticles){
         this.myArticles = myArticles;
 
-        this.articlePanel = new Panel(new GridLayout(myArticles.size()-1,1));
+        this.articlePanel = new Panel(new GridLayout(myArticles.size()-1,0));
+        this.articlePanel.setBackground(Color.blue);
         for(int i = 0;i < myArticles.size();i++){
             this.articlePanel.add(createArticlePanel(myArticles.get(i)));
         }
