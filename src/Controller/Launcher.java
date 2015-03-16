@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Launcher extends Applet {
 
-    private String prez = "Cette application a pour but de vous familiariser avec les injections SQL qui se cachent derriére de nombreux formulaires. A commencer par tous les sites ou vous vous connectez pour pouvoir accéder à certaines ressources !";
+    private String prez = "<html><center>Cette application a pour but de vous familiariser avec les <br> injections SQL qui se cachent derriére de nombreux formulaires.  <br>  A commencer par tous les sites ou vous vous connectez pour pouvoir accéder à certaines ressources ! </center></html>";
 
     public void paint (Graphics g) {
 
@@ -33,6 +33,7 @@ public class Launcher extends Applet {
 
         JPanel panelGeneral = new JPanel(new GridLayout(2,1));
         JLabel presentation = new JLabel(prez);
+        presentation.setPreferredSize(new Dimension(400,75));
         JButton commencer = new JButton("Commencer");
         commencer.setPreferredSize(new Dimension(100,75));
 
