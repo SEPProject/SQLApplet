@@ -51,4 +51,9 @@ public class ArticleManager {
         return this.panierValue;
     }
 
+    public void viderPanier(){
+        this.panierValue = 0;
+        this.articleInPanier = new ArrayList<Article>();
+    }
+
 }

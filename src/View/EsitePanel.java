@@ -87,7 +87,10 @@ public class EsitePanel extends Panel {
 
     private Panel createPanierPanel(){
         Panel toReturn = new Panel(new GridBagLayout());
-        JButton reset = new JButton("Reset");
+        JButton reset = new JButton("Reset panier");
+        JButton resetBase = new JButton("Reset base");
+
+        JLabel whatToAdd = new JLabel("Numéro à ajouter :");
 
         detailPanier = new JPanel();
         detailPanier.setLayout(new GridLayout(15,0));
@@ -117,20 +120,42 @@ public class EsitePanel extends Panel {
             }
         });
 
+        reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                am.viderPanier();
+                valeurPanier.setText("Valeur du panier : "+am.getPanierValue()+" €");
+                detailPanier.removeAll();
+                detailPanier.repaint();
+            }
+        });
+
         GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
-        c.gridy = 0;
-        toReturn.add(reset,c);
+        int cGridY = 0;
 
-        c.gridy = 1;
+        c.gridy = cGridY;
+        cGridY++;
+        toReturn.add(resetBase,c);
+        c.gridy = cGridY+1;
+        cGridY++;
+        toReturn.add(reset,c);
+        c.gridy = cGridY+1;
+        cGridY++;
         toReturn.add(detailPanier,c);
-        c.gridy = 2;
+        c.gridy = cGridY+1;
+        cGridY++;
+        toReturn.add(whatToAdd,c);
+        c.gridy = cGridY+1;
+        cGridY++;
         toReturn.add(idToAdd,c);
-        c.gridy = 3;
+        c.gridy = cGridY+1;
+        cGridY++;
         toReturn.add(addPanier,c);
-        c.gridy = 4;
+        c.gridy = cGridY+1;
+        cGridY++;
         toReturn.add(valeurPanier,c);
 
         toReturn.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_PANIER));
