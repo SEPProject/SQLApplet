@@ -1,9 +1,12 @@
 package View;
 
 import Model.Article;
+import Model.ArticleManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -11,9 +14,10 @@ import java.util.ArrayList;
  */
 public class EsitePanel extends Panel {
 
+    private ArticleManager am;
+
     private ArrayList<Article> myArticles;
     private Panel articlePanel;
-
 
     private int WIDTH_PANIER = 150;
     private int HEIGHT_PANIER = 350;
@@ -24,6 +28,7 @@ public class EsitePanel extends Panel {
     private int HEIGHT_ARTICLE_PANEL = 600;
 
     public EsitePanel(ArrayList<Article> myArticles){
+        this.am = new ArticleManager(myArticles);
         this.myArticles = myArticles;
 
         this.articlePanel = new Panel(new GridLayout(myArticles.size(),0));
@@ -37,11 +42,10 @@ public class EsitePanel extends Panel {
 
         this.add(articlePanel);
         this.add(createPanierPanel());
-
     }
 
-
     private Panel createArticlePanel(Article article){
+
         Panel toReturn = new Panel(new GridBagLayout());
         JLabel price = new JLabel(String.valueOf(article.getPrice()+"€"));
         JLabel id = new JLabel(String.valueOf("Numéro : "+article.getId()));
@@ -73,6 +77,7 @@ public class EsitePanel extends Panel {
 
         toReturn.setPreferredSize(new Dimension(WIDTH_ARTICLE_DET_PANEL,HEIGHT_ARTICLE_DET_PANEL));
 
+
         return toReturn;
     }
 
@@ -84,10 +89,26 @@ public class EsitePanel extends Panel {
         detailPanier.setBackground(Color.PINK);
         detailPanier.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_DETAIL_PANIER));
 
-        JTextArea idToAdd = new JTextArea();
+        final JTextArea idToAdd = new JTextArea();
         idToAdd.setPreferredSize(new Dimension(100,30));
         JButton addPanier = new JButton("Ajouter");
         JLabel valeurPanier = new JLabel("Valeur du panier : 0 €");
+
+        addPanier.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               try{
+                  int id = Integer.parseInt(idToAdd.getText());
+                    Article articleToAdd = am.getArticleFromId(id);
+                   if(articleToAdd != null){
+                       createPanelArticleForPanier(articleToAdd);
+                   }
+               }catch(NumberFormatException d){
+
+               }
+
+            }
+        });
 
         GridBagConstraints c = new GridBagConstraints();
 
