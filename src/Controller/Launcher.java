@@ -4,14 +4,19 @@ import Model.Article;
 import View.EsitePanel;
 import View.SQLMissionPanel;
 
+import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
  * Created by julescantegril on 10/03/2015.
  */
 public class Launcher extends Applet {
+
+    private String prez = "Cette application a pour but de vous familiariser avec les injections SQL qui se cachent derriére de nombreux formulaires. A commencer par tous les sites ou vous vous connectez pour pouvoir accéder à certaines ressources !";
 
     public void paint (Graphics g) {
 
@@ -25,6 +30,27 @@ public class Launcher extends Applet {
     // Méthode appelée par le navigateur lorsque l'applet est chargée.
     public void init(){
         super.init();
+
+        JPanel panelGeneral = new JPanel(new GridLayout(2,1));
+        JLabel presentation = new JLabel(prez);
+        JButton commencer = new JButton("Commencer");
+        commencer.setPreferredSize(new Dimension(100,75));
+
+        commencer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                initializeApplet();
+            }
+        });
+
+        panelGeneral.add(presentation);
+        panelGeneral.add(commencer);
+        this.add(panelGeneral);
+
+    }
+
+    public void initializeApplet(){
+        this.removeAll();
         SQLMissionPanel mpSQL = new SQLMissionPanel();
         this.setLayout(new GridLayout(1, 3));
 

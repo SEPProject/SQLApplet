@@ -45,7 +45,7 @@ public class EsitePanel extends Panel {
         Panel toReturn = new Panel(new GridBagLayout());
         JLabel price = new JLabel(String.valueOf(article.getPrice()+"€"));
         JLabel id = new JLabel(String.valueOf("Numéro : "+article.getId()));
-        JLabel name = new JLabel(article.getName());
+        JLabel name = new JLabel(article.getName()+"                ");
         JLabel description = new JLabel(article.getDescription());
 
         GridBagConstraints c = new GridBagConstraints();
@@ -85,7 +85,7 @@ public class EsitePanel extends Panel {
         detailPanier.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_DETAIL_PANIER));
 
         JTextArea idToAdd = new JTextArea();
-        idToAdd.setPreferredSize(new Dimension(70,15));
+        idToAdd.setPreferredSize(new Dimension(100,30));
         JButton addPanier = new JButton("Ajouter");
         JLabel valeurPanier = new JLabel("Valeur du panier : 0 €");
 
