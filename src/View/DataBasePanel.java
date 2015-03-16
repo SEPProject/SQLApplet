@@ -72,8 +72,19 @@ public class DataBasePanel extends Panel {
         dbPanel.add(labelPrixArt);
     }
 
-    private Panel createVerificationPanel(){
-        return null;
+    private JPanel createVerificationPanel(){
+        JPanel toReturn = new JPanel();
+        JTextArea requestToTest = new JTextArea();
+        requestToTest.setPreferredSize(new Dimension(300,25));
+
+        JButton validerRequest = new JButton("Valider requête");
+        JButton validerError = new JButton("Valider error");
+
+        toReturn.add(requestToTest);
+        toReturn.add(validerRequest);
+        toReturn.add(validerError);
+
+        return toReturn;
     }
 
 
