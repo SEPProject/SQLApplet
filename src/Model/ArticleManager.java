@@ -9,8 +9,13 @@ public class ArticleManager {
 
     ArrayList<Article> myArticle;
 
+    ArrayList<Article> articleInPanier;
+
+    private int panierValue;
+
     public ArticleManager(ArrayList<Article> myArticle){
         this.myArticle = myArticle;
+        this.articleInPanier = new ArrayList<Article>();
     }
 
     public void addArticle(Article article){
@@ -24,6 +29,26 @@ public class ArticleManager {
             }
         }
         return null;
+    }
+
+    public void addArticleToPanier(Article article){
+        this.articleInPanier.add(article);
+        panierValue = panierValue + article.getPrice();
+    }
+
+    public void removeArticleToPanier(int id){
+        for(int i = 0; i<this.articleInPanier.size();i++){
+            if(this.articleInPanier.get(i).getId() == id){
+                panierValue = panierValue - this.articleInPanier.get(i).getPrice();
+                this.articleInPanier.remove(i);
+            }
+
+        }
+
+    }
+
+    public int getPanierValue(){
+        return this.panierValue;
     }
 
 }

@@ -92,7 +92,7 @@ public class EsitePanel extends Panel {
         final JTextArea idToAdd = new JTextArea();
         idToAdd.setPreferredSize(new Dimension(100,30));
         JButton addPanier = new JButton("Ajouter");
-        JLabel valeurPanier = new JLabel("Valeur du panier : 0 €");
+        final JLabel valeurPanier = new JLabel("Valeur du panier : 0 €");
 
         addPanier.addActionListener(new ActionListener() {
             @Override
@@ -101,6 +101,8 @@ public class EsitePanel extends Panel {
                   int id = Integer.parseInt(idToAdd.getText());
                     Article articleToAdd = am.getArticleFromId(id);
                    if(articleToAdd != null){
+                       am.addArticleToPanier(articleToAdd);
+                       valeurPanier.setText("Valeur du panier : "+am.getPanierValue()+" €");
                        createPanelArticleForPanier(articleToAdd);
                    }
                }catch(NumberFormatException d){
