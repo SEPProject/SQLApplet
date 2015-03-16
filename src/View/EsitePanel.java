@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class EsitePanel extends Panel {
 
+    private JPanel detailPanier;
+
     private ArticleManager am;
 
     private ArrayList<Article> myArticles;
@@ -41,6 +43,8 @@ public class EsitePanel extends Panel {
         this.setLayout(new GridLayout(1,2));
 
         this.add(articlePanel);
+
+
         this.add(createPanierPanel());
     }
 
@@ -85,7 +89,8 @@ public class EsitePanel extends Panel {
         Panel toReturn = new Panel(new GridBagLayout());
         JButton reset = new JButton("Reset");
 
-        JPanel detailPanier = new JPanel();
+        detailPanier = new JPanel();
+        detailPanier.setLayout(new GridLayout(15,0));
         detailPanier.setBackground(Color.PINK);
         detailPanier.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_DETAIL_PANIER));
 
@@ -103,7 +108,7 @@ public class EsitePanel extends Panel {
                    if(articleToAdd != null){
                        am.addArticleToPanier(articleToAdd);
                        valeurPanier.setText("Valeur du panier : "+am.getPanierValue()+" €");
-                       createPanelArticleForPanier(articleToAdd);
+                       detailPanier.add(createPanelArticleForPanier(articleToAdd));
                    }
                }catch(NumberFormatException d){
 
@@ -137,5 +142,7 @@ public class EsitePanel extends Panel {
         JLabel toReturn = new JLabel(article.getName()+" "+String.valueOf(article.getPrice())+"€");
         return toReturn;
     }
+
+
 
 }
