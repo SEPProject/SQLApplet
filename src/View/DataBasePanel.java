@@ -5,6 +5,8 @@ import Model.DataBaseManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +29,7 @@ public class DataBasePanel extends Panel {
 
         JLabel baseTitle = new JLabel("article_table");
 
+        this.setLayout(new GridLayout(3,1));
         this.add(baseTitle);
         this.add(createDatabasePanel(articles));
         this.add(createVerificationPanel());
@@ -72,19 +75,41 @@ public class DataBasePanel extends Panel {
     }
 
     private JPanel createVerificationPanel(){
-        JPanel toReturn = new JPanel();
+        JPanel toReturn = new JPanel(new GridLayout(2,1));
+        JPanel buttonsPanel = new JPanel();
+
         JTextArea requestToTest = new JTextArea();
         requestToTest.setPreferredSize(new Dimension(300,25));
 
         JButton validerRequest = new JButton("Valider requête");
         JButton validerError = new JButton("Valider error");
+        JButton resetBase = new JButton("Réinitialiser la base");
+
+        buttonsPanel.add(validerRequest);
+        buttonsPanel.add(validerError);
+
+        resetBase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dbm.resetDb();
+                repaintDb();
+            }
+        });
+
 
         toReturn.add(requestToTest);
-        toReturn.add(validerRequest);
-        toReturn.add(validerError);
+        toReturn.add(buttonsPanel);
 
         return toReturn;
     }
 
+    private void repaintDb(){
+        JLabel baseTitle = new JLabel("article_table");
+
+        this.setLayout(new GridLayout(3,1));
+        this.add(baseTitle);
+        this.add(createDatabasePanel(dbm.getOriginalArticles()));
+        this.add(createVerificationPanel());
+    }
 
 }

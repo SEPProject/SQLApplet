@@ -31,6 +31,7 @@ public class EsitePanel extends Panel {
 
     public EsitePanel(ArrayList<Article> myArticles){
         this.am = new ArticleManager(myArticles);
+
         this.myArticles = myArticles;
 
         this.articlePanel = new Panel(new GridLayout(myArticles.size(),0));
@@ -53,7 +54,7 @@ public class EsitePanel extends Panel {
         Panel toReturn = new Panel(new GridBagLayout());
         JLabel price = new JLabel(String.valueOf(article.getPrice()+"€"));
         JLabel id = new JLabel(String.valueOf("Numéro : "+article.getId()));
-        JLabel name = new JLabel(article.getName()+"                ");
+        JLabel name = new JLabel(article.getName()+" ----- ");
         JLabel description = new JLabel(article.getDescription());
 
         GridBagConstraints c = new GridBagConstraints();
@@ -89,6 +90,7 @@ public class EsitePanel extends Panel {
         Panel toReturn = new Panel(new GridBagLayout());
         JButton reset = new JButton("Reset panier");
         JButton resetBase = new JButton("Reset base");
+        JButton buy = new JButton("Acheter");
 
         JLabel whatToAdd = new JLabel("Numéro à ajouter :");
 
@@ -130,6 +132,7 @@ public class EsitePanel extends Panel {
             }
         });
 
+
         GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.VERTICAL;
@@ -157,6 +160,9 @@ public class EsitePanel extends Panel {
         c.gridy = cGridY+1;
         cGridY++;
         toReturn.add(valeurPanier,c);
+        c.gridy = cGridY+1;
+        cGridY++;
+        toReturn.add(buy,c);
 
         toReturn.setPreferredSize(new Dimension(WIDTH_PANIER,HEIGHT_PANIER));
 
