@@ -89,7 +89,6 @@ public class EsitePanel extends Panel {
     private Panel createPanierPanel(){
         Panel toReturn = new Panel(new GridBagLayout());
         JButton reset = new JButton("Reset panier");
-        JButton resetBase = new JButton("Reset base");
         JButton buy = new JButton("Acheter");
 
         JLabel whatToAdd = new JLabel("Numéro à ajouter :");
@@ -140,9 +139,6 @@ public class EsitePanel extends Panel {
         int cGridY = 0;
 
         c.gridy = cGridY;
-        cGridY++;
-        toReturn.add(resetBase,c);
-        c.gridy = cGridY+1;
         cGridY++;
         toReturn.add(reset,c);
         c.gridy = cGridY+1;

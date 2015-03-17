@@ -85,8 +85,6 @@ public class DataBasePanel extends Panel {
         JButton validerError = new JButton("Valider error");
         JButton resetBase = new JButton("Réinitialiser la base");
 
-        buttonsPanel.add(validerRequest);
-        buttonsPanel.add(validerError);
 
         resetBase.addActionListener(new ActionListener() {
             @Override
@@ -96,6 +94,9 @@ public class DataBasePanel extends Panel {
             }
         });
 
+        buttonsPanel.add(validerRequest);
+        buttonsPanel.add(validerError);
+        buttonsPanel.add(resetBase);
 
         toReturn.add(requestToTest);
         toReturn.add(buttonsPanel);
