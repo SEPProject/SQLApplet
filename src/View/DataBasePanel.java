@@ -2,6 +2,7 @@ package View;
 
 import Model.Article;
 import Model.Database.DataBaseManager;
+import Model.Database.SQLErrorGenerator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,11 +91,12 @@ public class DataBasePanel extends Panel {
         validerRequest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(dbm.execQuery(requestToTest.getText().toString()).isGoodRequest()){
-                    dbm.resetDb();
+                SQLErrorGenerator resultRequest = dbm.execQuery(requestToTest.getText().toString());
+                if(resultRequest.isGoodRequest()){
+                    dbm.majDataBase();
                     requestResult.setText("Bonne requête");
                 }else{
-                    requestResult.setText("Mauvaise requête");
+                    requestResult.setText("Mauvaise requête :"+resultRequest.getMessage());
                 }
                 refreshDb();
             }
