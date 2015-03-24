@@ -1,7 +1,7 @@
 package View;
 
 import Model.Article;
-import Model.DataBaseManager;
+import Model.Database.DataBaseManager;
 
 import javax.swing.*;
 import java.awt.*;
