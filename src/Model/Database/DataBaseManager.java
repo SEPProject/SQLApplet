@@ -62,7 +62,7 @@ public class DataBaseManager {
             e.printStackTrace();//query problem on a une erreur
             return new SQLErrorGenerator(e);
         }
-        return new SQLErrorGenerator();//requête bien exécutée
+        return new SQLErrorGenerator();
     }
 
     public void majDataBase(){

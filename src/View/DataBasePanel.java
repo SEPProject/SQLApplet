@@ -78,13 +78,34 @@ public class DataBasePanel extends Panel {
         JPanel toReturn = new JPanel(new GridLayout(2,1));
         JPanel buttonsPanel = new JPanel();
 
-        JTextArea requestToTest = new JTextArea();
+        final JTextArea requestToTest = new JTextArea();
         requestToTest.setPreferredSize(new Dimension(300,25));
 
         JButton validerRequest = new JButton("Valider requête");
         JButton validerError = new JButton("Valider error");
         JButton resetBase = new JButton("Réinitialiser la base");
 
+        final JLabel requestResult = new JLabel();
+
+        validerRequest.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(dbm.execQuery(requestToTest.getText().toString()).isGoodRequest()){
+                    dbm.resetDb();
+                    requestResult.setText("Bonne requête");
+                }else{
+                    requestResult.setText("Mauvaise requête");
+                }
+                refreshDb();
+            }
+        });
+
+        validerError.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         resetBase.addActionListener(new ActionListener() {
             @Override
@@ -110,6 +131,15 @@ public class DataBasePanel extends Panel {
         this.setLayout(new GridLayout(3,1));
         this.add(baseTitle);
         this.add(createDatabasePanel(dbm.getOriginalArticles()));
+        this.add(createVerificationPanel());
+    }
+
+    private void refreshDb(){
+        JLabel baseTitle = new JLabel("article_table");
+
+        this.setLayout(new GridLayout(3,1));
+        this.add(baseTitle);
+        this.add(createDatabasePanel(dbm.getArticles()));
         this.add(createVerificationPanel());
     }
 
