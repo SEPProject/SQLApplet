@@ -30,7 +30,6 @@ public class DataBaseManager {
 
     public void addArticle(Article article){
         this.articles.add(article);
-
     }
 
     public ArrayList<Article> getArticles(){
@@ -39,6 +38,17 @@ public class DataBaseManager {
 
     public void resetDb(){
         this.articles = originalArticles;
+        try {
+            ResultSet resultatQuery = statement.executeQuery("DELETE FROM articles");
+            for(int i = 0;i<this.articles.size();i++){
+                statement.executeQuery("INSERT INTO articles VALUES ("+this.articles.get(i).getId()+","+
+                        this.articles.get(i).getPrice()+","+
+                        this.articles.get(i).getName()+","+
+                        this.articles.get(i).getDescription()+")");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Article> getOriginalArticles(){
@@ -53,6 +63,23 @@ public class DataBaseManager {
             return new SQLErrorGenerator(e);
         }
         return new SQLErrorGenerator();//requête bien exécutée
+    }
+
+    public void majDataBase(){
+        this.articles = new ArrayList<Article>();
+        try {
+            ResultSet resultatQuery = statement.executeQuery("SELECT * INTO articles");
+            boolean rowExist = resultatQuery.first();
+            while(rowExist){
+                this.articles.add(new Article(resultatQuery.getInt("id"),
+                        resultatQuery.getInt("prix"),
+                        resultatQuery.getString("nom"),
+                        resultatQuery.getString("description")));
+                rowExist = resultatQuery.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();//query problem on a une erreur
+        }
     }
 
 }
