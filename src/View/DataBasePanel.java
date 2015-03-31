@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Launcher;
 import Model.Article;
 import Model.Database.DataBaseManager;
 import Model.Database.SQLErrorGenerator;
@@ -24,12 +25,14 @@ public class DataBasePanel extends Panel {
     private String idCol = "Id";
     private String prixCol = "Prix";
 
-    public DataBasePanel(ArrayList<Article> articles){
+    private Launcher l;
 
+    public DataBasePanel(ArrayList<Article> articles, Launcher l){
+        this.l = l;
         this.dbm = new DataBaseManager(articles);
 
-        JLabel baseTitle = new JLabel("article_table");
-
+        JLabel baseTitle = new JLabel("articles");
+        resultRequestString = "Aucune requête à valider";
         this.setLayout(new GridLayout(3,1));
         this.add(baseTitle);
         this.add(createDatabasePanel(articles));
@@ -75,6 +78,7 @@ public class DataBasePanel extends Panel {
         dbPanel.add(labelPrixArt);
     }
 
+    String resultRequestString = "Aucune requête à valider";
     private JPanel createVerificationPanel(){
         JPanel toReturn = new JPanel(new GridLayout(2,1));
         JPanel buttonsPanel = new JPanel();
@@ -88,15 +92,18 @@ public class DataBasePanel extends Panel {
 
         final JLabel requestResult = new JLabel();
 
+        requestResult.setText(resultRequestString);
         validerRequest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SQLErrorGenerator resultRequest = dbm.execQuery(requestToTest.getText().toString());
                 if(resultRequest.isGoodRequest()){
                     dbm.majDataBase();
-                    requestResult.setText("Bonne requête");
+                    resultRequestString = "Bonne requête";
+                    requestResult.setText(resultRequestString);
                 }else{
-                    requestResult.setText("Mauvaise requête :"+resultRequest.getMessage());
+                    resultRequestString = "Mauvaise requête"+" "+resultRequest.getMessage();
+                    requestResult.setText(resultRequestString);
                 }
                 refreshDb();
             }
@@ -113,13 +120,14 @@ public class DataBasePanel extends Panel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dbm.resetDb();
-                repaintDb();
+                resetDb();
             }
         });
 
         buttonsPanel.add(validerRequest);
         buttonsPanel.add(validerError);
         buttonsPanel.add(resetBase);
+        buttonsPanel.add(requestResult);
 
         toReturn.add(requestToTest);
         toReturn.add(buttonsPanel);
@@ -127,22 +135,24 @@ public class DataBasePanel extends Panel {
         return toReturn;
     }
 
-    private void repaintDb(){
-        JLabel baseTitle = new JLabel("article_table");
-
+    private void resetDb(){
+        JLabel baseTitle = new JLabel("articles");
+        this.removeAll();
         this.setLayout(new GridLayout(3,1));
         this.add(baseTitle);
         this.add(createDatabasePanel(dbm.getOriginalArticles()));
         this.add(createVerificationPanel());
+        this.l.refreshESite(dbm.getOriginalArticles());
     }
 
     private void refreshDb(){
-        JLabel baseTitle = new JLabel("article_table");
-
+        JLabel baseTitle = new JLabel("articles");
+        this.removeAll();
         this.setLayout(new GridLayout(3,1));
         this.add(baseTitle);
         this.add(createDatabasePanel(dbm.getArticles()));
         this.add(createVerificationPanel());
+        this.l.refreshESite(dbm.getArticles());
     }
 
 }

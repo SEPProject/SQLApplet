@@ -45,8 +45,23 @@ public class EsitePanel extends Panel {
 
         this.add(articlePanel);
 
-
         this.add(createPanierPanel());
+    }
+
+    public void majArticlePanel(ArrayList<Article> myNewArticles){
+        this.myArticles = myNewArticles;
+        this.am.setArticles(myNewArticles);
+        this.articlePanel.removeAll();
+        this.articlePanel.setLayout((new GridLayout(myArticles.size(),0)));
+        for(int i = 0;i < myArticles.size();i++){
+            this.articlePanel.add(createArticlePanel(myArticles.get(i)));
+        }
+        this.articlePanel.setPreferredSize(new Dimension(WIDTH_ARTICLE_PANEL,HEIGHT_ARTICLE_PANEL));
+
+        this.articlePanel.revalidate();
+        this.revalidate();
+        this.articlePanel.repaint();
+        this.repaint();
     }
 
     private Panel createArticlePanel(Article article){

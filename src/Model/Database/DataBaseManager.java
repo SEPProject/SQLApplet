@@ -26,6 +26,7 @@ public class DataBaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        this.resetDb();
     }
 
     public void addArticle(Article article){
@@ -68,7 +69,7 @@ public class DataBaseManager {
     public void majDataBase(){
         this.articles = new ArrayList<Article>();
         try {
-            ResultSet resultatQuery = statement.executeQuery("SELECT * INTO articles");
+            ResultSet resultatQuery = statement.executeQuery("SELECT * FROM articles");
             boolean rowExist = resultatQuery.first();
             while(rowExist){
                 this.articles.add(new Article(resultatQuery.getInt("id"),

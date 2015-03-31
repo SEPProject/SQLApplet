@@ -56,4 +56,8 @@ public class ArticleManager {
         this.articleInPanier = new ArrayList<Article>();
     }
 
+    public void setArticles(ArrayList<Article> artc){
+        this.myArticle = artc;
+    }
+    
 }

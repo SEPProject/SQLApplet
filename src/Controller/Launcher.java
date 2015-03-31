@@ -84,7 +84,7 @@ public class Launcher extends Applet {
 
         SQLMissionPanel mpSQL = new SQLMissionPanel();
         eSite = new EsitePanel(myArts);
-        dbp = new DataBasePanel(myArts);
+        dbp = new DataBasePanel(myArts,this);
         missionPanel = mpSQL.getSQLMissionPanel();
 
         this.add(dbp);
@@ -108,6 +108,10 @@ public class Launcher extends Applet {
     public void stop(){
        super.stop();
    }
+
+    public void refreshESite(ArrayList<Article> myArticles){
+        eSite.majArticlePanel(myArticles);
+    }
 
 
 }
