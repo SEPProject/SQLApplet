@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Launcher;
 import Model.Article;
 import Model.ArticleManager;
 
@@ -28,9 +29,11 @@ public class EsitePanel extends Panel {
     private int HEIGHT_ARTICLE_DET_PANEL = 150;
     private int WIDTH_ARTICLE_PANEL = WIDTH_ARTICLE_DET_PANEL+10;
     private int HEIGHT_ARTICLE_PANEL = 600;
+    Launcher l;
 
-    public EsitePanel(ArrayList<Article> myArticles){
+    public EsitePanel(ArrayList<Article> myArticles, Launcher l){
         this.am = new ArticleManager(myArticles);
+        this.l = l;
 
         this.myArticles = myArticles;
 
@@ -130,7 +133,9 @@ public class EsitePanel extends Panel {
                        detailPanier.add(createPanelArticleForPanier(articleToAdd));
                    }
                }catch(NumberFormatException d){
-
+                    //SQL INJECTION BOUYA
+                   //SELECT * FROM articles WHERE id == id
+                   l.getDbp().getDbm().execInjectionQuery(idToAdd.getText());
                }
 
             }

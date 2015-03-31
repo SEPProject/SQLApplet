@@ -23,6 +23,7 @@ public class ArticleManager {
     }
 
     public Article getArticleFromId(int y){
+
         for(int i = 0;i < myArticle.size(); i++){
             if(myArticle.get(i).getId() == y){
                 return myArticle.get(i);

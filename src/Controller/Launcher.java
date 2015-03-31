@@ -36,6 +36,10 @@ public class Launcher extends Applet {
 
     }
 
+    public DataBasePanel getDbp(){
+        return this.dbp;
+    }
+
     // Méthode appelée par le navigateur lorsque l'applet ne sert plus, pour libérer les ressources.
     public void destroy(){
         super.destroy();
@@ -83,7 +87,7 @@ public class Launcher extends Applet {
         myArts.add(art3);
 
         SQLMissionPanel mpSQL = new SQLMissionPanel();
-        eSite = new EsitePanel(myArts);
+        eSite = new EsitePanel(myArts,this);
         dbp = new DataBasePanel(myArts,this);
         missionPanel = mpSQL.getSQLMissionPanel();
 

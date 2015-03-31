@@ -39,6 +39,9 @@ public class DataBasePanel extends Panel {
         this.add(createVerificationPanel());
     }
 
+    public DataBaseManager getDbm(){
+        return this.dbm;
+    }
 
 
     private JPanel createDatabasePanel(ArrayList<Article> articles){

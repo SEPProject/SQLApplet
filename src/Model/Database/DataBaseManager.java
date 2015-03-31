@@ -66,6 +66,16 @@ public class DataBaseManager {
         return new SQLErrorGenerator();
     }
 
+    public SQLErrorGenerator execInjectionQuery(String query){
+        try {
+            statement.executeUpdate("SELECT prix FROM articles WHERE id = "+query);
+        } catch (SQLException e) {
+            e.printStackTrace();//query problem on a une erreur
+            return new SQLErrorGenerator(e);
+        }
+        return new SQLErrorGenerator();
+    }
+
     public void majDataBase(){
         this.articles = new ArrayList<Article>();
         try {
@@ -82,5 +92,7 @@ public class DataBaseManager {
             e.printStackTrace();//query problem on a une erreur
         }
     }
+
+
 
 }
