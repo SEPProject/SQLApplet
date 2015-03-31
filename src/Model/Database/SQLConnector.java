@@ -11,16 +11,16 @@ public class SQLConnector {
 
     private static boolean driverLoaded = false;
 
-    private static String urlBase ="jdbc:mysql://localhost:8888/sql_applet_db";
-    private static String utilisateur = "a";
-    private static String motDePasse = "a";
+    private static String urlBase ="jdbc:mysql://localhost:8889/sql_applet_db";
+    private static String utilisateur = "b";
+    private static String motDePasse = "b";
 
     public static void chargementDriver(){
         /* Chargement du driver JDBC pour MySQL */
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch ( ClassNotFoundException e ) {
-
+            e.printStackTrace();
         }
     }
 
@@ -33,7 +33,7 @@ public class SQLConnector {
 
         Connection connexion = null;
         try {
-            System.out.println("error ");
+           // System.out.println("error ");
             connexion = DriverManager.getConnection(urlBase, utilisateur, motDePasse);
             System.out.println("no error ");
             return connexion;
@@ -43,7 +43,7 @@ public class SQLConnector {
             return null;
         } finally {
             if ( connexion != null ) {
-
+               // System.out.println("erreur la");
             }else{
                 System.out.println("erreur ici ");
             }

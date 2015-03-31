@@ -39,12 +39,12 @@ public class DataBaseManager {
     public void resetDb(){
         this.articles = originalArticles;
         try {
-            ResultSet resultatQuery = statement.executeQuery("DELETE FROM articles");
+             statement.executeUpdate("DELETE FROM articles");
             for(int i = 0;i<this.articles.size();i++){
-                statement.executeQuery("INSERT INTO articles VALUES ("+this.articles.get(i).getId()+","+
-                        this.articles.get(i).getPrice()+","+
-                        this.articles.get(i).getName()+","+
-                        this.articles.get(i).getDescription()+")");
+                statement.executeUpdate("INSERT INTO articles VALUES ("+this.articles.get(i).getId()+","+
+                        this.articles.get(i).getPrice()+",'"+
+                        this.articles.get(i).getName()+"','"+
+                        this.articles.get(i).getDescription()+"')");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class DataBaseManager {
 
     public SQLErrorGenerator execQuery(String query){
         try {
-            ResultSet resultatQuery = statement.executeQuery(query);
+             statement.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();//query problem on a une erreur
             return new SQLErrorGenerator(e);

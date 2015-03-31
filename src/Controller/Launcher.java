@@ -74,9 +74,9 @@ public class Launcher extends Applet {
         TEST THE ESITE PANEL
          */
 
-        Article art1 = new Article(1,125,"KIPSTA","Parfaite pour le sport en intérieur.");
-        Article art2 = new Article(2,12,"NIKE","Trés utile lors de mauvais temps.");
-        Article art3 = new Article(3,15,"ADIDAS","Efficace sur un terrain en herbe.");
+        Article art1 = new Article(1,125,"KIPSTA","Parfaite pour le sport en intérieur");
+        Article art2 = new Article(2,12,"NIKE","Trés utile lors de mauvais temps");
+        Article art3 = new Article(3,15,"ADIDAS","Efficace sur un terrain en herbe");
         ArrayList<Article> myArts = new ArrayList<Article>();
         myArts.add(art1);
         myArts.add(art2);
