@@ -135,6 +135,10 @@ public class EsitePanel extends Panel {
                }catch(NumberFormatException d){
                     //SQL INJECTION BOUYA
                    //SELECT * FROM articles WHERE id == id
+
+                   //SQL SAMPLE :
+                   //SELECT prix FROM articles WHERE id == 20 OR UPDATE articles SET prix = 1 WHERE id = 2
+
                    l.getDbp().getDbm().execInjectionQuery(idToAdd.getText());
                }
 
